@@ -1,2 +1,0 @@
-# learn-c
-Practicing c
