@@ -12,7 +12,7 @@ int veryfy(int num1,int num2){
 }
 
 
-int main() {
+int main(void) {
 
   int a= 12, b=13;
   int equal=veryfy(a,b);

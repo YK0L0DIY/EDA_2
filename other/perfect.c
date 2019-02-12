@@ -23,7 +23,7 @@ int perfect(int number){
         return 0;
 }
 
-int main(){
+int main(void){
 
         int number;
         char cont[]="n";

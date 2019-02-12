@@ -49,7 +49,7 @@ void calc(int operation){
         printf("\nThe result is: %f\n", result);
 }
 
-int main(){
+int main(void){
         while (1) {
                 printf("\n%s\n", "1) Addiction");
                 printf("%s\n", "2) Subraction");
