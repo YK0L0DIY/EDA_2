@@ -1,22 +1,27 @@
 #include <stdio.h>
 
+//recebe o numero de elementos a calcular
+void fib(int n) {
+    int first = 0, second = 1, next;
 
-int main(void){
-
-  int first = 0, second = 1, next, c;
-
-  for (c = 0; c < 20; c++)
-  {
-    if (c <= 1)
-      next = c;
-    else
-    {
-      next = first + second;
-      first = second;
-      second = next;
+    if (n >= 0)
+        printf("%d\n", first);
+    if (n >= 1)
+        printf("%d\n", second);
+    if (n > 1) {
+        for (int i = 2; i <= n; i++) {
+            next = first + second;
+            first = second;
+            second = next;
+            printf("%d\n", next);
+        }
     }
-    printf("%d\n", next);
-  }
+}
 
-  return 0;
+int main(void) {
+    int elementos;
+    scanf("%d", &elementos);
+    fib(elementos);
+
+    return 0;
 }
