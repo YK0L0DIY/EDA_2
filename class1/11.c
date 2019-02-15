@@ -30,20 +30,6 @@ void calcularBinario(int number){
                 printf("\n");
         }
 
-        //ou
-        // int test;
-        //
-        // for (int i = 31; i >= 0; i--)
-        // {
-        //         test = number >> i;
-        //
-        //         if (test & 1)
-        //                 printf("1");
-        //         else
-        //                 printf("0");
-        // }
-        //
-        // printf("\n");
 }
 
 int main()
