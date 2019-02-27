@@ -1,72 +1,62 @@
 #include <stdio.h>
 
+void maior(int array[], int *inicio, int *fim, int *pontuacao){
+    if (array[*inicio] > array[*fim]) {                         // verifica qual dos numeros do array e o maior
+        *pontuacao += array[*inicio];                           // incremnata a pontuacao com o elemento do inicio caso seija maior
+        (*inicio)++;                                            // incremnata a posicao do elemento inicial
+    } else {
+        *pontuacao += array[*fim];                              // incremnata a pontuacao com o elemento do fim caso seija maior
+        (*fim)--;                                               // decrementa a posicao final do array
+    }
+}
+
+void menor(int array[], int *inicio, int *fim, int *pontuacao) {
+    if (array[*inicio] < array[*fim]) {                         // verifica qual dos numeros do array e a menor
+        *pontuacao += array[*inicio];                           // incremnata a pontuacao com o elemento do inicio caso seija menor
+        (*inicio)++;                                            // incremnata a posicao do elemento inicial
+    } else {
+        *pontuacao += array[*fim];                              // incremnata a pontuacao com o elemento do fim caso seija menor
+        (*fim)--;                                               // decrementa a posicao final do array
+    }
+}
+
 int main(void) {
+    int nElementos;
+    scanf("%d", &nElementos);           // guarda o tamanho do array
 
-    int nElementos = 0;
+    int array[nElementos],              // inicializa o array com n elementos
+            first = 0,                  // posicao do primeiro elemento do array
+            last = nElementos - 1,      // posicao do ultimo elemento do array
+            player = 1,                 // jogaror, caso seja 1 -> Alex caso seija -1 -> Bela
+            alexP = 0,                  // pontuacao do Alex
+            belaP = 0,                  // pontuacao da Bela
+            menorJ = 1;                 // caso a jogada da bela seja escolher o menor ou maior
 
-    //guarda o tamanho do array
-    scanf("%d", &nElementos);
 
-    int array[nElementos], //inicializa o array com n elementos
-            first = 0, //posicao do primeiro elemento do array
-            last = nElementos - 1, //posicao do ultimo elemento do array
-            player = 0, // jogaror, caso seja 0 -> Alex caso seija 1 -> Bela
-            alex = 0, // pontuacao do Alex
-            bela = 0, // pontuacao da Bela
-            menor = 1; // caso a jogada da bela seja escolher o menor (menor=1)
-
-    // recebe o input do array
     for (int i = 0; i < nElementos; i++) {
-        fscanf(stdin, "%d", &array[i]);
+        scanf("%d", &array[i]);         // recebe o input do array
     }
 
-    do {
-        //teste para ver quem e o jogador
-        if (player == 0) {
-            //verifica qual dos elementos e o maior ""caso do Alex
-            if (array[first] > array[last]) {
-                alex += array[first];
-                first++;
-            } else {
-                alex += array[last];
-                last--;
-            }
-            player = 1; // troca o jogador
-
+    for (int i = 0; i < nElementos; i++) {
+        if (player == 1)                            // testa se o jogador e o Alex
+            maior(array, &first, &last, &alexP);    // caso seija o alex executa a funcao maior (este escolhe sempre o maiior numeor)
+        else if (player == -1 && menorJ == 1) {     // verifica se e a bela e a sua jogada e escolher o menor
+            menor(array, &first, &last, &belaP);    // corre a funcao de escolher o menor
+            menorJ *= -1;                           // coloca -1 na proxima jogada da bela para escolher o maior
         } else {
-            // verifica se o numero a escolher é o menor ou o maior ""caso da Bela
-            if (menor) {
-                //escolhe o menor elemento
-                if (array[first] < array[last]) {
-                    bela += array[first];
-                    first++;
-                } else {
-                    bela += array[last];
-                    last--;
-                }
-                menor = 0; // o proximo eleento a ser escolhido sera o maior
-            } else {
-                // escolhe o maior elemento
-                if (array[first] > array[last]) {
-                    bela += array[first];
-                    first++;
-                } else {
-                    bela += array[last];
-                    last--;
-                }
-                menor = 1; // o proximo elemento a ser escolhido sera o menor
-            }
-            player = 0; // troca o jogador
+            maior(array, &first, &last, &belaP);    // corre a funcao de escolher o maior a bela caso seja esta
+            menorJ *= -1;                           // coloca 1 na proxima jogada da bela para esta escolher o menor
         }
-    } while (first <= last);
+        player *= -1;                               // muda de jogador
+    }
 
     // da print do resultado
-    if (alex > bela) {
-        printf("Alex ganha com %d contra %d\n", alex, bela);
-    } else if (alex < bela) {
-        printf("Bela ganha com %d contra %d\n", bela, alex);
+    if (alexP > belaP) {
+        printf("Alex ganha com %d contra %d\n", alexP, belaP);
+    } else if (alexP < belaP) {
+        printf("Bela ganha com %d contra %d\n", belaP, alexP);
     } else {
-        printf("Alex e Bela empatam a %d\n", alex);
+        printf("Alex e Bela empatam a %d\n", alexP);
     }
 
     return 0;
