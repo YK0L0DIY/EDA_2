@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void maior(int array[], int *inicio, int *fim, int *pontuacao){
+void maior(int array[], int *inicio, int *fim, int *pontuacao) {
     if (array[*inicio] > array[*fim]) {                         // verifica qual dos numeros do array e o maior
         *pontuacao += array[*inicio];                           // incremnata a pontuacao com o elemento do inicio caso seija maior
         (*inicio)++;                                            // incremnata a posicao do elemento inicial
@@ -38,25 +38,28 @@ int main(void) {
     }
 
     for (int i = 0; i < nElementos; i++) {
-        if (player == 1)                            // testa se o jogador e o Alex
-            maior(array, &first, &last, &alexP);    // caso seija o alex executa a funcao maior (este escolhe sempre o maiior numeor)
-        else if (player == -1 && menorJ == 1) {     // verifica se e a bela e a sua jogada e escolher o menor
-            menor(array, &first, &last, &belaP);    // corre a funcao de escolher o menor
-            menorJ *= -1;                           // coloca -1 na proxima jogada da bela para escolher o maior
-        } else {
-            maior(array, &first, &last, &belaP);    // corre a funcao de escolher o maior a bela caso seja esta
-            menorJ *= -1;                           // coloca 1 na proxima jogada da bela para esta escolher o menor
+        // testa se o jogador e o Alex ou a bela
+        if (player == 1)
+            // caso seija o alex executa a funcao maior (este escolhe sempre o maiior numeor)
+            maior(array, &first, &last, &alexP);
+        else {
+            // verifica o tipo de jogada que a bela deve de realizar
+            // corre uma das hipoteces
+            // inverte o modo de jogar da bela na proxima jogada
+            menorJ == 1 ? menor(array, &first, &last, &belaP) : maior(array, &first, &last, &belaP);
+            menorJ *= -1;
         }
-        player *= -1;                               // muda de jogador
+        // inverte o jogador
+        player *= -1;
     }
 
     // da print do resultado
-    if (alexP > belaP) {
-        printf("Alex ganha com %d contra %d\n", alexP, belaP);
-    } else if (alexP < belaP) {
-        printf("Bela ganha com %d contra %d\n", belaP, alexP);
-    } else {
+    if (alexP == belaP) {
         printf("Alex e Bela empatam a %d\n", alexP);
+    } else {
+        alexP < belaP ?
+        printf("Bela ganha com %d contra %d\n", belaP, alexP) :
+        printf("Alex ganha com %d contra %d\n", alexP, belaP);
     }
 
     return 0;
