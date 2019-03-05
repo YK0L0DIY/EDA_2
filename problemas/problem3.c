@@ -45,21 +45,20 @@ int indice(char name[NAMESIZE], struct team *equipas, int nEquipas) {
 
 // determina o vencedor do torneio
 int winner(struct team *equipas, int numE) {
-    int winnerI = 0, pontosW = 0;
+    int winnerI = 0, pontosW = 0, existe = 0;
 
-    for (int i = 0; i < numE; i++) {                //procura a equipa com mais pontos
-        if (equipas[i].pontos >= pontosW) {
+    for (int i = 0; i < numE; i++) {                // procura a equipa com mais pontos
+        if (equipas[i].pontos > pontosW) {
             winnerI = i;
             pontosW = equipas[i].pontos;
+            existe = 0;                             // como o maximo foi atualizado este ainda e unico
+        } else if (equipas[i].pontos == pontosW) {  // caso ja exista
+            existe = 1;
         }
     }
 
-    for (int i = 0; i < numE; i++) {                //verifica se é a unica com o mesmo numero de pontos
-        if (equipas[i].pontos == pontosW && winnerI != i) {
-            return -1;
-        }
-    }
-    return winnerI;
+    return (existe == 0 ? winnerI: -1);
+
 }
 
 int main(void) {
