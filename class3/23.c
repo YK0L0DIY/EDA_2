@@ -24,7 +24,7 @@ bool list_empty(struct list *list) {
     }
     return false;
 }
-
+// make some tests
 struct no *no(int value) {
     struct no *no = malloc(sizeof(struct no));
     if (no != NULL) {
