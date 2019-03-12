@@ -1,43 +1,33 @@
 #include<stdio.h>
 #include<string.h>
-#define MAX 2
 
-struct student
-{
-    char name[20];
-    int roll_no;
-    float marks;
-};
+#define SIZE 1101
+#define SIZEHASH 127
 
-int main()
-{
-    struct student arr_student[MAX];
-    int i;
-
-    for(i = 0; i < MAX; i++ )
-    {
-        printf("\nEnter details of student %d\n\n", i+1);
-
-        printf("Enter name: ");
-        scanf("%s", arr_student[i].name);
-
-        printf("Enter roll no: ");
-        scanf("%d", &arr_student[i].roll_no);
-
-        printf("Enter marks: ");
-        scanf("%f", &arr_student[i].marks);
+void verify(char caracter,char array[]){
+    if (array[(int)caracter]==caracter){
+        printf("%c",caracter);
+        memset(array,' ', SIZEHASH);
+    } else{
+        array[(int)caracter]=caracter;
     }
+}
 
+void convert(char string[SIZE]) {
+    int i=0;
+    char myHash[SIZEHASH]={0};
+    while (string[i]!=0){
+        verify(string[i],myHash);
+        i++;
+    }
     printf("\n");
+}
 
-    printf("Name\tRoll no\tMarks\n");
+int main(void) {
+    char encripted[SIZE];                               // palavra encriptada
 
-    for(i = 0; i < MAX; i++ )
-    {
-        printf("%s\t%d\t%.2f\n",
-               arr_student[i].name, arr_student[i].roll_no, arr_student[i].marks);
+    while (scanf("%[^\n]%*c", encripted) == 1) {        // verifica o input caso seja diferente de nulo
+        convert(encripted);                             // converte o codigo para a palavra correta
     }
-
-    // signal to operating system program ran fine
     return 0;
 }
