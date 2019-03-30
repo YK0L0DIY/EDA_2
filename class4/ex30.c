@@ -10,21 +10,21 @@ FILE *abrir() {
         int zero = 0;
         file = fopen(NOME, "w+");
         for (int i = 0; i < SIZEMEM; i++) {
-            fwrite(&zero, sizeof(zero), 1, file);
+            fwrite(&zero, 1, 1, file);
         }
     }
     return file;
 }
 
 void escreve(FILE *file, int position, int value) {
-    fseek(file, ((position - 1) * sizeof(int)), SEEK_SET);
-    fwrite(&value, sizeof(value), 1, file);
+    fseek(file, ((position - 1) * 1), SEEK_SET);
+    fwrite(&value, 1, 1, file);
 }
 
 int le(FILE *file, int position) {
     int place;
-    fseek(file, ((position - 1) * sizeof(int)), SEEK_SET);
-    fread(&place, sizeof(int), 1, file);
+    fseek(file, ((position - 1) * 1), SEEK_SET);
+    fread(&place, 1, 1, file);
     return place;
 }
 

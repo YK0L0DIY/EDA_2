@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define TAMANHO 765
 
 struct no {                                                         // no que ira conter a informacao do ipv4
@@ -8,8 +9,7 @@ struct no {                                                         // no que ir
 
 };
 
-struct no *
-newNo(int a, int b, int c, int ipv) {                    // funcao que cria um novo no e devolve o seu endereço
+struct no *newNo(int a, int b, int c, int ipv) {                    // funcao que cria um novo no e devolve o seu endereço
     struct no *no = malloc(sizeof(struct no));
     if (no != NULL) {
         no->a = a;
@@ -43,7 +43,7 @@ int main(void) {
         }
     }
     while (scanf("%d.%d.%d.%d", &a, &b, &c, &d) != EOF) {           // recebe o input ate ao final do ficheiro
-        bool printed = FALSE;                                       // variavel que seja usada para verificar se foi devolvida uma route ou nao
+        _Bool printed = false;                                       // variavel que seja usada para verificar se foi devolvida uma route ou nao
         position = a + b + c;                                       // calcula a posicao
 
         if (table[position] == 0) {                                 // caso nao exista nada nessa posicao devole o defoutl ou no route
@@ -53,13 +53,13 @@ int main(void) {
 
             if (temp->a == a && temp->b == b && temp->c == c) {     // verifica se e esse o elemento pretendido
                 printf("%d\n", temp->ipv);                          // caso seja e feito o print do ipv
-                printed = TRUE;                                     // informa-se que foi impresso
+                printed = true;                                     // informa-se que foi impresso
             } else {                                                // caso nao seja esse elemento o pretendido
                 while (temp->next != NULL) {                        // ira correr um ciclo dentro dos elementos daquela posicao ate nao existir mais nenhum ou ter encontrado o correto
                     temp = temp->next;                              // o de controlo passa a se o proximo elemento
                     if (temp->a == a && temp->b == b && temp->c == c) {     // verifica se e esse o pretendido
                         printf("%d\n", temp->ipv);                  // caso seja da print do ipv
-                        printed = TRUE;                             // informa-se que foi impresso
+                        printed = true;                             // informa-se que foi impresso
                         break;                                      // termina o ciclo
                     }
                 }
