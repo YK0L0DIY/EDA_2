@@ -26,8 +26,7 @@ void notExist(int id) {                                         // funcao para d
     printf("+ SUJEITO %06d desconhecido\n", id);
 }
 
-void
-addInfo(FILE *file) {                                           // funcao que e corrida caso o comando seja adicionar informacao
+void addInfo(FILE *file) {                                      // funcao que e corrida caso o comando seja adicionar informacao
     struct person *p = malloc(sizeof(struct person));           // crai-se uma pessoa
     p->existe = 1;                                              // coloca-se a indicacao de que esta existe
     scanf(" %d", &p->id);                                       // recebe informcao do stardart input
