@@ -1,2 +1,3 @@
-# learn-c
-Practicing c
+# Description
+
+Repository for Data Structures and Algorithms
